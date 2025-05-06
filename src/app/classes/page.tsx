@@ -1,5 +1,6 @@
 import React from 'react';
 import EducationClasses from '../../components/EducationClasses';
+import Link from 'next/link';
 
 export const metadata = {
   title: 'Skincare Education Classes - SkincareEdu',
@@ -56,7 +57,7 @@ export default function ClassesPage() {
       
       <div className="mt-16 text-center">
         <h2 className="text-2xl font-bold mb-4">Ready to transform your skincare routine?</h2>
-        <button className="btn btn-primary">Start Learning Now</button>
+        <Link href="/classes/vaseline-routine" className="btn btn-primary">Start Learning Now</Link>
       </div>
     </div>
   );

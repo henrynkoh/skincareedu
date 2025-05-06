@@ -107,9 +107,9 @@ const EducationClasses = () => {
           </div>
           
           <div className="flex flex-wrap gap-4">
-            <button className="btn btn-primary">
+            <Link href="/classes/vaseline-routine" className="btn btn-primary">
               Continue Learning
-            </button>
+            </Link>
             <button className="btn bg-gray-100 text-gray-800 hover:bg-gray-200">
               Reset Progress
             </button>
@@ -180,7 +180,7 @@ const EducationClasses = () => {
                         {step.completed ? 'Mark as Incomplete' : 'Mark as Complete'}
                       </button>
                       
-                      <Link href="#" className="text-sm text-primary font-medium">
+                      <Link href="/classes/vaseline-routine/all-steps" className="text-sm text-primary font-medium">
                         Read More →
                       </Link>
                     </div>

@@ -100,9 +100,9 @@ export default function Home() {
                   <span className="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center mr-2">3</span>
                   <p>Proper cleansing techniques</p>
                 </div>
-                <div className="text-primary font-medium mt-2">
+                <Link href="/classes/vaseline-routine/all-steps" className="text-primary font-medium mt-2 block">
                   View all 30 steps →
-                </div>
+                </Link>
               </div>
             </div>
           </div>
