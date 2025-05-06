@@ -1,5 +1,5 @@
 import React from 'react';
-import EducationClasses from '@/components/EducationClasses';
+import EducationClasses from '../../components/EducationClasses';
 
 export const metadata = {
   title: 'Skincare Education Classes - SkincareEdu',

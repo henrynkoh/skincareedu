@@ -1,5 +1,5 @@
 import React from 'react';
-import IngredientScanner from '@/components/IngredientScanner';
+import IngredientScanner from '../../components/IngredientScanner';
 
 export const metadata = {
   title: 'Ingredient Scanner - SkincareEdu',

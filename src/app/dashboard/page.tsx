@@ -1,5 +1,5 @@
 import React from 'react';
-import SkinMonitoring from '@/components/SkinMonitoring';
+import SkinMonitoring from '../../components/SkinMonitoring';
 
 export const metadata = {
   title: 'Skin Monitoring Dashboard - SkincareEdu',
