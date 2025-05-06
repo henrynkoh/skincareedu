@@ -1,0 +1,105 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String        @id @default(uuid())
+  email        String        @unique
+  name         String?
+  password     String
+  skinType     String?       // dry, oily, combination, sensitive
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  skinEntries  SkinEntry[]
+  progress     CourseProgress[]
+}
+
+model SkinEntry {
+  id          String     @id @default(uuid())
+  userId      String
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  imageUrl    String?
+  notes       String?
+  issueType   String     // wrinkles, acne, dryness, redness, other
+  rating      Int        // 1-5 severity rating
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@index([userId])
+}
+
+model Course {
+  id          String     @id @default(uuid())
+  title       String
+  description String
+  duration    String     // e.g., "4 weeks"
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  modules     Module[]
+  progress    CourseProgress[]
+}
+
+model Module {
+  id          String     @id @default(uuid())
+  courseId    String
+  course      Course     @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title       String
+  description String?
+  order       Int
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  steps       Step[]
+
+  @@index([courseId])
+}
+
+model Step {
+  id          String     @id @default(uuid())
+  moduleId    String
+  module      Module     @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  title       String
+  description String?
+  order       Int
+  videoUrl    String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  progress    StepProgress[]
+
+  @@index([moduleId])
+}
+
+model CourseProgress {
+  id          String     @id @default(uuid())
+  userId      String
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseId    String
+  course      Course     @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  progress    Float      @default(0) // Percentage of completion
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@unique([userId, courseId])
+  @@index([userId])
+  @@index([courseId])
+}
+
+model StepProgress {
+  id          String     @id @default(uuid())
+  userId      String
+  stepId      String
+  step        Step       @relation(fields: [stepId], references: [id], onDelete: Cascade)
+  completed   Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@unique([userId, stepId])
+  @@index([stepId])
+} 
